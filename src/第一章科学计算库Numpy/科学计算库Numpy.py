@@ -5,7 +5,7 @@ Created on 2019年1月9日
 '''
 import numpy as np
 '''
-课时2：Array数组
+课时3：Array数组
 '''
 array = [1,2,3,4,5]
 # array + 1 无法执行这样直接的操作
@@ -38,3 +38,75 @@ print(array2[1][2:3])
 '''
 课时4：数组结构
 '''
+# 矩阵格式（多维的形式）
+zhang_array = np.array([[1,2,3],
+                        [4,5,6],
+                        [7,8,9]])
+print(zhang_array)
+print(zhang_array.shape)
+print(zhang_array.size)
+# 输出有几个维度，这里是两个维度
+print(zhang_array.ndim)
+# 取矩阵中的一行，如下为第二行，从零开始
+print(zhang_array[1])
+# 取矩阵中的一列，如下第二列，从零开始
+print(zhang_array[:,1])
+# 取矩阵中的某一个值，例如取5这个数值
+print(zhang_array[1,1])
+print(zhang_array[1][1])
+# 直接赋值运算后的矩阵，新的名称只是执行原名称矩阵数据的位置，并没有新建，如果改变数值都会改变
+zhang_array2 = zhang_array
+# 这样copy的复制是完全全的复制，重新建立的array，完全不一样了，操作不会干扰
+zhang_array2 = zhang_array.copy()
+# 构建等差数列，[ 0 10 20 30 40 50 60 70 80 90],可以使用arange
+zhang_array = np.arange(0,100,10)
+print(zhang_array)
+
+# 建立索引,
+mask = np.array([0,0,0,1,1,1,0,0,1,1],dtype=bool)
+print(mask)
+print(zhang_array[mask])
+random_array = np.random.rand(10)
+mask = random_array > 0.5
+print(mask)
+print(zhang_array[mask])
+tang_array = np.array([10,20,30,40,50])
+# 输出数值中哪些数据大于30，并找出位置具体索引，(array([3, 4], dtype=int32),)
+print(np.where(tang_array > 30))
+# 找到数组中对应的值,[40 50]
+print(tang_array[np.where(tang_array > 30)])
+'''
+课时5：数组类型
+'''
+# 设置数据中元素的类型，[1. 2. 3. 4. 5.] float32
+tang_array = np.array([1,2,3,4,5],dtype=np.float32)
+print(tang_array,tang_array.dtype,tang_array.nbytes)
+# 设置数组中的元素样式类型不同也是可以的，object不要求统一的数据类型
+tang_array = np.array([1,2,40,'str'],dtype=object)
+print(tang_array)
+# 使用np.asarray进行数组数据类型的统一，但是通过赋值新的变量名不会影响原数组，相当于建立了新的数组。ps:astype可以直接对数组的类型进行变化
+tang_array2 = np.asarray(tang_array, dtype=np.str)
+print(tang_array,tang_array2)
+'''
+课时6：array数组的数值计算
+'''
+tang_array = np.array([[1,2,3],[3,4,5]])
+# axis可以指定按照列还是行来求和，0表示第一个轴是数轴，为列。
+print(tang_array,np.sum(tang_array,axis=0),tang_array.sum(axis=-1))
+# 实现乘法运算，内部元素按照要求进行乘法运算prod，还有最小值和最大值，min和max,同时还可以确认最小值的位置索引
+print(tang_array.prod(axis=0),tang_array.argmin())
+# 计算标准差使用std,计算方差使用var
+print(tang_array.std(),tang_array.var())
+# 让数组中小于某个值的都变成某个值，大于某个值的都变成某个值clip,小于2的都变成2，大于4的都变成4
+print(tang_array.clip(2,4))
+# 对数组进行四舍五入，使用round，使用decimals参数控制精确到哪个小数点
+tang_array = np.array([1.2,3.56,4.8,7.1])
+print(tang_array.round())
+'''
+课时7：排序操作
+'''
+# 排序使用sort,可以指定排序轴，默认是0轴
+tang_array = np.array([[1.2,3.56],[4.8,7.1]])
+print(np.sort(tang_array,axis=0))
+# 使用searchsorted来进行数组中插入数组，数组刚好嵌入到数组中间，并返回对应位置
+# 分开不同列或者行进行排序，使用lexsort

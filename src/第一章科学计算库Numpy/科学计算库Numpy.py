@@ -110,3 +110,37 @@ tang_array = np.array([[1.2,3.56],[4.8,7.1]])
 print(np.sort(tang_array,axis=0))
 # 使用searchsorted来进行数组中插入数组，数组刚好嵌入到数组中间，并返回对应位置
 # 分开不同列或者行进行排序，使用lexsort
+'''
+课时8：数组形状操作
+'''
+tang_array = np.arange(10)
+# 把一维数组改造成为二维数组，或者使用reshape()函数，但是需要保证大小是支持变化的
+tang_array.shape = 2,5
+# 给数组增加一个维度
+# tang_array = tang_array[:,np.newaxis]
+# 压缩数组，去除掉不需要的空值
+tang_array.squeeze()
+# 转置数组操作，行和列进行转换,或者使用tang_array.T
+tang_array = tang_array.transpose()
+# 数组的拼接使用np.concatenate((数组1，数组2)，axis来指定拼接维度)
+# c = np.concatenate((a,b))
+# 把数组拉平
+tang_array = tang_array.flatten()
+print(tang_array,tang_array.shape)
+'''
+课时9：数组生成函数
+'''
+# 表示从2开始到20大小，每个数字隔3，数据类型是整形
+tang_array = np.arange(2,20,3,dtype = np.int32)
+# 表示是从0开始到10，构造10个数,等距的分布
+tang_array2 = np.linspace(0,10,10)
+print(tang_array,tang_array2)
+'''
+课时10：常用生成函数
+'''
+# 构建长度为3的都是0数值的数组或者是1的
+tang_array = np.zeros((3,3),dtype = np.int32)
+tang_array2 = np.ones((2,2),dtype = np.int32)
+# 构造一个数组都为1，与指定数组的形状一致，如下
+tang_array3 = np.ones_like(tang_array)
+print(tang_array,tang_array2,tang_array3)

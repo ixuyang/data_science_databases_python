@@ -144,3 +144,25 @@ tang_array2 = np.ones((2,2),dtype = np.int32)
 # 构造一个数组都为1，与指定数组的形状一致，如下
 tang_array3 = np.ones_like(tang_array)
 print(tang_array,tang_array2,tang_array3)
+'''
+课时11：四则运算
+'''
+x = np.asarray([5,5])
+y = np.asarray([2,1])
+# 数组乘法运算,为对应位置相乘[10  5]
+print(np.multiply(x,y))
+# 矩阵运算为交叉相乘后求和,15。但是必须保证维度的对应关系是可以进行矩阵乘法运算的。
+print(np.dot(x,y))
+x = np.zeros((1,2),dtype = np.int32)
+y = np.ones((1,2),dtype = np.int32)
+# 可以进行逻辑运算，这里比如直接对比是否相等来逻辑判断[[False False]]
+print(x,y,x == y)
+# 进行与操作，使用如下[[False False]]
+print(np.logical_and(x,y))
+'''
+课时12：随机模块
+'''
+# 构建随机数组，里面所有的值都是从0到1的，如下构建3行2列的随机浮点数数组
+print(np.random.rand(3,2))
+# 构建整数的随机的数组
+print(np.random.randint(10,size = (5,3)))

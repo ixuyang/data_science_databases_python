@@ -163,6 +163,25 @@ print(np.logical_and(x,y))
 课时12：随机模块
 '''
 # 构建随机数组，里面所有的值都是从0到1的，如下构建3行2列的随机浮点数数组
-print(np.random.rand(3,2))
+print(np.random.rand(3,2),np.random.rand())
 # 构建整数的随机的数组
 print(np.random.randint(10,size = (5,3)))
+# 从0到10之间获取三个随机数数，[6 9 6]
+print(np.random.randint(0,10,3))
+# 取值单个随机数,可以使用一下的办法
+print(np.random.rand(),np.random.sample())
+# 设置输出的小树点后两位
+np.set_printoptions(precision = 2)
+print(np.random.normal(0,0.1,10))
+# 洗牌操作,对有顺序的数组进行洗牌打散，每次洗牌的结果都是不一致的
+tang_array3 = np.arange(10)
+print(tang_array3)
+np.random.shuffle(tang_array3)
+print(tang_array3)
+# 随机的种子，让每次随机的模式是一样的结果。seed()括号中的数字是指定的种子，只要其不变随机的结果就不变
+np.random.seed(1)
+print(np.random.normal(0,0.1,10))
+'''
+课时13：文件读写
+'''
+

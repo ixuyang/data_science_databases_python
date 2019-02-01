@@ -184,4 +184,28 @@ print(np.random.normal(0,0.1,10))
 '''
 课时13：文件读写
 '''
-
+data = []
+with open('tang.txt') as f:
+    for line in f:
+        fileds = line.split()
+        cur_data = [float(x) for x in fileds]
+        data.append(cur_data)
+data = np.array(data)
+print(data)
+# 更快捷的办法，默认以空格为分隔符，如果是其他的话，
+# 需要参数指定分隔符，delimiter = ','
+# 如果要跳过第一行增加参数，skiprows = 1
+# 使用指定的列需要增加参数，usecols = (0,1,4)
+data1 = np.loadtxt('tang.txt')
+print(data1)
+'''
+课时14：数组保存写文件
+'''
+tang_array = np.array([[1,2,3],[4,5,6]])
+# fmt参数来指定是整数还是其他的类型
+np.savetxt('tang1.txt',tang_array,fmt='%d',delimiter = ',')
+# 读写array结构
+np.save('tang_array.npy',tang_array)
+tang = np.load('tang_array.npy')
+print(tang)
+# 压缩存储多个数组的时候可以使使用npz的文件来保存，可以保存多个

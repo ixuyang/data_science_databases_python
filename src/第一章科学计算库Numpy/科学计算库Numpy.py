@@ -4,6 +4,7 @@ Created on 2019年1月9日
 @author: UPXY
 '''
 import numpy as np
+from numpy.core.fromnumeric import size
 '''
 课时3：Array数组
 '''
@@ -209,3 +210,52 @@ np.save('tang_array.npy',tang_array)
 tang = np.load('tang_array.npy')
 print(tang)
 # 压缩存储多个数组的时候可以使使用npz的文件来保存，可以保存多个
+'''
+Numpy练习题
+'''
+# 打印当前Numpy版本
+print(np.__version__)
+# 构造一个全零的矩阵，并打印其占用内存大小
+tang_array = np.zeros((5,6),dtype = np.int32)
+print('%d bytes'%(tang_array.size*tang_array.itemsize))
+# 打印一个函数的帮助文档，比如numpy.add()
+# print(help(np.info(np.add)))
+# 创建一个10-49的数组，并将其倒序排列
+tang_array = np.arange(10,50,dtype = np.int32)
+tang_array = tang_array[::-1]
+print(tang_array)
+# 找到一个数组中不为0的索引
+tang_array = np.array([1,0,2,3,0,6])
+print(np.where(tang_array!=0))
+
+print(np.nonzero(tang_array))
+# 随机构造一个3*3的矩阵，并打印其中最大和最小值
+tang_array = np.random.randint(10,size=(3,3))
+print(tang_array,np.max(tang_array),tang_array.min())
+# 构造一个5*5的矩阵，另其值为1，并在最外层加上一圈0,ps:这个主要服务于未来图形的构建
+tang_array = np.ones((5,5),dtype = np.int32)
+tang_array = np.pad(tang_array, pad_width = 1, mode = 'constant',constant_values = 0)
+print(tang_array)
+# 构建一个shape为（6,7,8）的矩阵，并找到第100个元素的索引值
+index = np.unravel_index(100,(6,7,8))
+print(index)
+# 对一个5*5的矩阵做归一化操作
+tang_array = np.random.randint(10,size=(3,3))
+tang_array = (tang_array - tang_array.min())/(tang_array.max()-tang_array.min())
+print(tang_array)
+# 找到两个数组中相同的值
+tang_array1 = np.random.randint(10,size=(3,3))
+tang_array2 = np.random.randint(10,size=(3,3))
+print(np.intersect1d(tang_array1,tang_array2))
+# 得到今天 明天 昨天的日期
+print(np.datetime64('today','D'),np.datetime64('today','D')-np.timedelta64(1,'D'),np.datetime64('today','D')+np.timedelta64(1,'D'))
+# 得到一个月中所有的天
+date_array = np.arange('2017-10','2017-11',dtype='datetime64[D]')
+print(date_array)
+# 得到一个数的整数部分
+tang_array = np.random.uniform(0,10,10)
+print(np.floor(tang_array))
+# 构造一个数组，让它不能改变
+# 打印大数据的部分值，全部值
+
+# tang_array = np.random.randint((6,7,8),dtype=np.int32)

@@ -256,6 +256,57 @@ print(date_array)
 tang_array = np.random.uniform(0,10,10)
 print(np.floor(tang_array))
 # 构造一个数组，让它不能改变
-# 打印大数据的部分值，全部值
-
+tang_array = np.zeros(5)
+tang_array.flags.writeable = False
+# tang_array[0] = 1 这里就不可以修改了，ValueError: assignment destination is read-only
+# 打印数据量大的数据的部分值，全部值
+np.set_printoptions(threshold=5)
+z = np.zeros((15,15))
+print(z)
+np.set_printoptions(threshold=np.nan)
+z = np.zeros((15,15))
+print(z)
 # tang_array = np.random.randint((6,7,8),dtype=np.int32)
+# 找到一个数组中，最接近一个数的索引
+z = np.arange(100)
+v = np.random.uniform(0,100)
+print(v)
+index = (np.abs(z-v)).argmin()
+print(z[index])
+# 32位float类型和32位int类型转换
+z = np.arange(10,dtype=np.int32)
+print(z.dtype)
+z = z.astype(np.float32)
+print(z.dtype)
+# 打印数组元素位置坐标与数值
+z = np.arange(9).reshape(3,3)
+for index,value in np.ndenumerate(z):
+    print(index,value)
+# 按照数组的某一列进行排序
+z = np.random.randint(0,10,(3,3))
+print(z)
+print(z[z[:,1].argsort()])
+# 统计数组中每个数值出现的次数，显示的结果表示对于数字序列中出现数值的次数
+z = np.array([1,2,3,11,1,1,1,1,2,2,3])
+print(np.bincount(z))
+# 如何对一个四维数组的最后两维来求和
+z = np.random.randint(0,10,(4,4,4,4))
+res = z.sum(axis=(-2,-1))
+print(res)
+# 交换矩阵中的两行
+z = np.arange(25).reshape(5,5)
+z[[0,1]] = z[[1,0]]
+print(z)
+# 找到一个数组中最常出现的数字
+z = np.array([1,2,3,11,1,1,1,1,2,2,3])
+print(np.bincount(z).argmax())
+# 快速查找TOP K
+z = np.arange(10000)
+np.random.shuffle(z)
+n = 5
+print(z[np.argpartition(-z,n)[:n]])
+# 去除掉一个数组中，所有元素都相同的数据
+z = np.random.randint(0,5,(10,3))
+e = np.all(z[:,1:] == z[:,:-1],axis=1)
+e = np.any(z[:,1:] == z[:,:-1],axis=1)
+print(e)
